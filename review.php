@@ -4,9 +4,7 @@
 <head>
 	 <link href="./style.css" type="text/css" rel="stylesheet">
 </head>	
-<div>
-  <p><a href="./index.html"> Home</a></p>
-</div>
+
 <h2 class='titlecenter'>Leave a Review</h2>
 
   <div class="form">
@@ -19,9 +17,8 @@
       <input type="text" placeholder="Comments"/>
 
       <button>submit</button>
-  <form>
-<input type="button" value="Cancel" onclick="window.location.href='./guest.html'" />
-</form>    </form>
+       <button>cancel</button>
+    </form>
   </div>
 </div>
 

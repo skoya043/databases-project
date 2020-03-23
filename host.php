@@ -4,9 +4,7 @@
 <head>
 	 <link href="./style.css" type="text/css" rel="stylesheet">
 </head>	
-<div>
-  <p><a href="./index.html"> Home</a></p>
-</div>
+
 <h2 class='titlecenter'>Host</h2>
 
   <div class="form">
@@ -14,7 +12,7 @@
     <form class="login-form">
       <input type="text" placeholder="ID"/>
       <button>Confirm</button>
-      <p class="message">New Properties? <a href="./property.html">Create a property</a></p>
+      <p class="message">New Properties? <a href="#">Create a property</a></p>
     </form>
   </div>
 </div>

@@ -4,9 +4,7 @@
 <head>
 	 <link href="./style.css" type="text/css" rel="stylesheet">
 </head>	
-<div>
-  <p><a href="./index.html"> Home</a></p>
-</div>
+
 <h2 class='titlecenter'>Guest</h2>
 
   <div class="form">
@@ -14,12 +12,9 @@
     <form class="login-form">
       <input type="text" placeholder="ID"/>
       <button>Submit</button>
-       <form>
-<input type="button" value="Look-Up Available Properties" onclick="window.location.href='./guestlookup.html'" />
-</form>      
-       <form>
-<input type="button" value="Leave a Review" onclick="window.location.href='./review.html'" />
-</form>
+      <button>Look-Up Available Properties</button>
+      <button>Leave a Review</button>
+
 
     </form>
   </div>
