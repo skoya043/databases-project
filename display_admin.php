@@ -4,7 +4,7 @@
 <title>Student Database</title>
 </head>
 <?php
-	include'admin.php';?>
+	include'admin_test.php';?>
 	<style><?php
-		include'C:\Users\kayla\Desktop\db-interface\db interface\style.css';?></style>
+		include'style.css';?></style>
 </html>
