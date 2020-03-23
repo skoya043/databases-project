@@ -8,6 +8,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>	
 
+<div>
+  <p><a href="./index.html"> Home</a></p>
+</div>
+
 <h2 style= "margin-top: 50px;" class='titlecenter'>Create a Property</h2>
 
 <div class="login-page">
@@ -65,7 +69,9 @@
     </label>           
     </div>
     <button>Submit</button>
-      <button>Cancel</button>
+  <form>
+<input type="button" value="Cancel" onclick="window.location.href='./host.html'" />
+</form>
       <p class="message">After creating a property and clicking submit, it should give you a message in JS, "property created", then page refreshes and you click cancel to take you back to the host page. Then you can enter your id to see your updated list of properties</p>
     </form>
   </div>

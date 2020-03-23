@@ -4,6 +4,11 @@
 <head>
    <link href="./style.css" type="text/css" rel="stylesheet">
 </head> 
+
+<div>
+  <p><a href="./index.html"> Home</a></p>
+</div>
+
 <h2 class='titlecenter'>Look-Up a Property</h2>
 
   <div class="form">
@@ -19,9 +24,15 @@
        <p style="margin-top: 10px;" class="checkboxmessage">Check-Out Date</p>
       <input type="date" placeholder="Check-Out Date"/>    
       <button>Search</button>
-       <button>Book a Property</button>
-      <button>Leave a Review</button>
-      <button>Cancel</button>
+  <form>
+<input type="button" value="Book a Property" onclick="window.location.href='./book.html'" />
+</form>
+  <form>
+<input type="button" value="Leave a Review" onclick="window.location.href='./review.html'" />
+</form>
+  <form>
+<input type="button" value="Cancel" onclick="window.location.href='./guest.html'" />
+</form>
     </form>
   </div>
 
