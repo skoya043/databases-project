@@ -22,7 +22,7 @@
 
       <button>submit</button>
        <form>
-<input type="button" value="Cancel" onclick="window.location.href='./guest.html'" />
+<input type="button" value="Cancel" onclick="window.location.href='./display_guest.php'" />
 </form>
     </form>
   </div>

@@ -16,7 +16,7 @@
     <form class="login-form">
       <input type="text" placeholder="ID"/>
       <button>Confirm</button>
-      <p class="message">New Properties? <a href="./property.html">Create a property</a></p>
+      <p class="message">New Properties? <a href="./display_property.php">Create a property</a></p>
           </form>
   </div>
 </div>

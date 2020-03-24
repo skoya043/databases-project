@@ -25,13 +25,13 @@
       <input type="date" placeholder="Check-Out Date"/>    
       <button>Search</button>
   <form>
-<input type="button" value="Book a Property" onclick="window.location.href='./book.html'" />
+<input type="button" value="Book a Property" onclick="window.location.href='./display_book.php'" />
 </form>
   <form>
-<input type="button" value="Leave a Review" onclick="window.location.href='./review.html'" />
+<input type="button" value="Leave a Review" onclick="window.location.href='./display_review.php'" />
 </form>
   <form>
-<input type="button" value="Cancel" onclick="window.location.href='./guest.html'" />
+<input type="button" value="Cancel" onclick="window.location.href='./display_guest.php'" />
 </form>
     </form>
   </div>
