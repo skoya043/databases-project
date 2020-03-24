@@ -25,7 +25,7 @@
       <input type="date" placeholder="Check-Out Date"/>    
       <button>Search</button>
   <form>
-<input type="button" value="Book a Property" onclick="window.location.href='./display_book.php'" />
+<input type="button" value="Book a Property" onclick="window.location.href='./book.php'" />
 </form>
   <form>
 <input type="button" value="Leave a Review" onclick="window.location.href='./display_review.php'" />
