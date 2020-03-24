@@ -4,7 +4,7 @@
 <title>Student Database</title>
 </head>
 <?php
-	include'admin.php';?>
+	include'guest.php';?>
 	<style><?php
 		include'style.css';?></style>
 </html>
