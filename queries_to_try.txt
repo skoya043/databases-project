@@ -1,0 +1,70 @@
+
+/*--------------------------QUERIES TO TRY OUT !!!!!!!!!!!!!!!------------------------------------------------------    */
+
+/*  SHOW ALL PROPERTIES  */
+
+select * from Property;
+
+/*  SHOW ALL PROPERTIES BY BRANCH country   example CANADA */
+
+
+SELECT branch.country,branch.name ,property.ID
+FROM (employee JOIN property ON employee.ID=employee_id)  JOIN branch on branch_id=branch.id 
+Where branch.country='Canada';
+
+/* SHOW  AVAILABLE PROPERTIES */
+
+select ID from property EXCEPT select property_id from property_agreement;
+
+
+
+/*  SHOW BOOKED PROPERTIES  */
+
+select property_id
+from property_agreement;
+
+/*  SHOW BOUGHT PROPERTIES  */
+select property_id
+from payment;
+
+
+/*  SHOW PROPERTIES BOOKED BY A SPECIFIC GUEST  example guest 7002  */
+
+SELECT property_id
+from property_agreement
+where guest_id=7002;
+
+
+
+/*  SHOW PROPERTIES BOUGHT BY A SPECIFIC GUEST (EXAMPLE GUEST:7003) */
+
+select property_id
+from payment 
+where guest_id=7003;
+
+
+/*  SHOW PROPERTIES RUN BY A SPECIFIC EMPLOYEE  */
+
+select ID
+from property
+where employee_id=2010;
+
+
+/*  SHOW EMPLOYEES THAT HAVE PROPERTIES */
+
+
+ 
+
+
+/* view specfic review  (example from property 6005)  */
+
+select *
+from review
+where ID=(select review_id from property where ID=6005);
+
+
+/* view specific bill  (example from property 6005)    */
+
+select *
+from payment 
+where property_id=6005;
