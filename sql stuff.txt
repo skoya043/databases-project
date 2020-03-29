@@ -1,0 +1,517 @@
+set search_path="project5";
+
+
+CREATE TABLE branch (
+	ID INTEGER NOT NULL,
+country VARCHAR(20), 
+name VARCHAR(20),
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE employee (
+	ID INTEGER,
+	branch_id INTEGER NOT NULL,
+	Name VARCHAR(20),
+	position VARCHAR(20),
+	salary FLOAT(3),
+	managerID INTEGER,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (managerID) REFERENCES employee(ID),
+	FOREIGN KEY (branch_id) REFERENCES branch(ID)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE host (
+	ID INTEGER,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(30) NOT NULL,
+	country VARCHAR(30) NOT NULL,
+	phone_number VARCHAR(30) NOT NULL, 
+	email VARCHAR(30) NOT NULL,
+	address_details VARCHAR(30) NOT NULL,   
+	PRIMARY KEY (ID)
+);
+
+
+
+CREATE TABLE review (
+	ID INTEGER,
+	rateValue FLOAT(1),
+	communication VARCHAR(100),
+	cleanliness VARCHAR(100),
+	PRIMARY KEY (ID)
+
+);
+
+CREATE TABLE booking_confirmation (
+	
+	ID INTEGER,
+	booking_details VARCHAR(100),
+	cancellation_policy  VARCHAR(100),
+	payment_status VARCHAR(20),
+    	PRIMARY KEY (ID)	
+);
+
+
+CREATE TABLE property (
+	ID INTEGER,
+host_id INTEGER NOT NULL,
+booking_id INTEGER NOT NULL,
+employee_id INTEGER,
+review_id INTEGER,	
+host_price FLOAT(3),	
+property_type VARCHAR(20),
+	
+/*attributes from property booking*/
+	start_day INTEGER NOT NULL,
+	start_month INTEGER NOT NULL,
+	start_year INTEGER NOT NULL,
+	
+	end_day INTEGER NOT NULL,
+	end_month INTEGER NOT NULL,
+	end_year INTEGER NOT NULL,
+/*attributes from adress*/
+house_num VARCHAR(4), 
+street VARCHAR(20),
+city VARCHAR(20),
+province VARCHAR(20),
+country VARCHAR(20),
+description VARCHAR(100),
+room_type VARCHAR(20),
+	
+	/*attributes from ammenties*/
+	pool BOOLEAN,
+	wifi BOOLEAN,
+	laundry BOOLEAN,
+	
+bed_count INTEGER,
+bath_count INTEGER,
+PRIMARY KEY (ID),
+FOREIGN KEY (host_id) REFERENCES host(ID)  ON UPDATE CASCADE,
+FOREIGN KEY (booking_id) REFERENCES booking_confirmation(ID),
+ 
+FOREIGN KEY (review_id) REFERENCES review(ID) ON UPDATE CASCADE,
+FOREIGN KEY (employee_id) REFERENCES employee(ID) ON UPDATE CASCADE
+);
+
+
+CREATE TABLE guest (
+	ID INTEGER NOT NULL,
+	 /* address_details **  */
+            house_num VARCHAR(4), 
+	street VARCHAR(20),
+	city VARCHAR(20),
+	province VARCHAR(20),
+	country VARCHAR(20),
+	
+	first_name VARCHAR(20) NOT NULL,
+	last_name VARCHAR(20) NOT NULL,
+	phone_number INTEGER NOT NULL,
+	property_id INTEGER, 
+	PRIMARY KEY(ID),
+	FOREIGN KEY (property_id) REFERENCES property(ID) 
+ON UPDATE CASCADE
+            ON DELETE NO ACTION
+
+);
+
+
+CREATE TABLE property_agreement ( 
+	ID INTEGER,
+	host_id INTEGER,
+	guest_id INTEGER NOT NULL,
+	property_id INTEGER NOT NULL,
+	PRIMARY KEY(ID),
+	FOREIGN KEY (host_id) REFERENCES host(ID) 
+ON UPDATE CASCADE,
+	FOREIGN KEY (property_id) REFERENCES property(ID) 
+ON UPDATE CASCADE,
+	FOREIGN KEY (guest_id) REFERENCES guest(ID) 
+ON UPDATE CASCADE
+);
+
+
+CREATE TABLE payment (
+	ID INTEGER,
+	booking_id INTEGER,
+	host_id INTEGER,
+	guest_id INTEGER NOT NULL,
+	property_id INTEGER NOT NULL,
+	property_type VARCHAR(20),
+	amount float(3),
+	status VARCHAR(20),
+	payment_type VARCHAR(20),
+	PRIMARY KEY (ID),
+	FOREIGN KEY (host_id) REFERENCES host(ID) 
+ON UPDATE CASCADE,
+	FOREIGN KEY (property_id) REFERENCES property(ID) 
+ON UPDATE CASCADE,
+	FOREIGN KEY (guest_id) REFERENCES guest(ID) 
+ON UPDATE CASCADE,
+	FOREIGN KEY (booking_id) REFERENCES booking_confirmation(ID)
+ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+
+
+
+/* Create 5 branches */
+INSERT INTO branch values (1000,'Canada','Canada Branch');
+INSERT INTO employee values (2000,1000,'Sarah','Manager',15040,NULL);
+
+INSERT INTO branch values (1001,'Amercia','America Branch');
+INSERT INTO employee values (2001,1001,'Erin','Manager',25040,NULL);
+
+
+INSERT INTO branch values (1002,'China','China Branch');
+INSERT INTO employee values (2002,1002,'May','Manager',25040,NULL);
+
+INSERT INTO branch values (1003,'Australia','Australia Branch');
+INSERT INTO employee values (2003,1003,'George','Manager',15040,NULL);
+
+INSERT INTO branch values (1004,'Russia','Russia Branch');
+INSERT INTO employee values (2004,1004,'Ana','Manager',15040,NULL);
+
+
+/* Create 5 regular employees for each branch */
+
+/*canada*/ 
+INSERT INTO employee values (2005,1000,'Dave','Employee',1040,2000);
+INSERT INTO employee values (2006,1000,'Carl','Employee',1041,2000);
+INSERT INTO employee values (2007,1000,'Tyler','Employee',1043,2000);
+INSERT INTO employee values (2008,1000,'May','Employee',1043,2000);
+INSERT INTO employee values (2009,1000,'John','Employee',1050,2000);
+
+
+
+/*America*/
+INSERT INTO employee values (2010,1001,'Leon','Employee',1140,2001);
+INSERT INTO employee values (2011,1001,'Jim','Employee',1541,2001);
+INSERT INTO employee values (2012,1001,'Bob','Employee',1243,2001);
+INSERT INTO employee values (2013,1001,'Skylar','Employee',1043,2001);
+INSERT INTO employee values (2014,1001,'Chip','Employee',1050,2001);
+
+/*China*/
+INSERT INTO employee values (2015,1002,'Mox','Employee',1940,2002);
+INSERT INTO employee values (2016,1002,'Molly','Employee',1941,2002);
+INSERT INTO employee values (2017,1002,'Ruth','Employee',1763,2002);
+INSERT INTO employee values (2018,1002,'Adam','Employee',1143,2002);
+INSERT INTO employee values (2019,1002,'Arnold','Employee',1030,2002);
+
+
+/*Australia*/
+INSERT INTO employee values (2020,1003,'Annie','Employee',1000,2003);
+INSERT INTO employee values (2021,1003,'Obi','Employee',2041,2003);
+INSERT INTO employee values (2022,1003,'Law','Employee',4043,2003);
+INSERT INTO employee values (2023,1003,'Nan','Employee',5043,2003);
+INSERT INTO employee values (2024,1003,'Harry','Employee',1050,2003);
+/*Russia*/
+INSERT INTO employee values (2025,1004,'Russo','Employee',1042,2004);
+INSERT INTO employee values (2026,1004,'Vlad','Employee',1541,2004);
+INSERT INTO employee values (2027,1004,'Arnie','Employee',1845,2004);
+INSERT INTO employee values (2028,1004,'Maya','Employee',1043,2004);
+INSERT INTO employee values (2029,1004,'Johnathan','Employee',1050,2004);
+
+
+
+
+/* Create some hosts  18  */
+INSERT INTO host values (3000,'Sophie','Turner','Canada',5193444532,'are@gmail.com','1231  drive');
+INSERT INTO host values (3001,'Kevin','Hart','Canada',5193224532,'rse@gmail.com','1232  drive');
+INSERT INTO host values (3002,'Dwayne','Johnson','Canada',2293324532,'dre@gmail12.com','1233  drive');
+INSERT INTO host values (3003,'Emin','nem','Canada',5193322232,'re@gmfail43.com','1234  drive');
+INSERT INTO host values (3004,'Jay','Z','Canada',5223324532,'re@gmaisl.ca','1235  drive');
+INSERT INTO host values (3005,'Bob','Dillon','Canada',5193324222,'re@gmail.crom','1236  drive');
+INSERT INTO host values (3006,'Emily','Blunt','Canada',2293324532,'re@gmailtt.com','1237  drive');
+INSERT INTO host values (3007,'Cara','Delevigne','Canada',5193774532,'re@g5mail.com','1238  drive');
+INSERT INTO host values (3008,'Jack','Black','Canada',5193333532,'re@gmai4l.com','1239  drive');
+INSERT INTO host values (3009,'Emma','Watson','United Kingdom',7493324532,'6re@gmail.com','1123  drive');
+INSERT INTO host values (3010,'Emma','Stone','United Kingdom',5193324532,'8re@gmail.com','1223  drive');
+INSERT INTO host values (3011,'Mark','Whalberg','Canada',5193332532,'6re@gmail.com','1323  drive');
+INSERT INTO host values (3012,'Scarlet','Johaneson','Canada',5453324532,'re@gmail.com','1423  drive');
+INSERT INTO host values (3013,'Rose','Leslie','Canada',5193324532,'r5e@gmail.com','1523  drive');
+INSERT INTO host values (3014,'Melissa','Benoist','Canada',5193326732,'re2e@gmail.com','123  drive');
+INSERT INTO host values (3015,'Bey','Yonce','Canada',5193323532,'re4@gmail44.com','1623  drive');
+INSERT INTO host values (3016,'Ryan','Reynolds','Canada',5223324532,'wr3e@gmail53.com','1723  drive');
+INSERT INTO host values (3017,'Blake','Lively','Canada',5193324882,'ree@gmail54.com','1823  drive');
+INSERT INTO host values (3018,'Alexandra','Daddario','Canada',5193324566,'re@gmail234.com','1923  drive');
+INSERT INTO host values (3019,'Anna','Kendrick','US',5193324332,'ree@gmail.com','10023  drive');
+INSERT INTO host values (3020,'Saorise','Ronan','Ireland',5283324532,'awre@gmail.com','11123  drive');
+
+
+/* create guests*/
+
+INSERT INTO guest values(7000,223,'Stret88','Ottawa','Ontario','Canada','Selena','Gomez',1111111111,NULL);
+INSERT INTO guest values(7001,223,'Street44','Ottawa','Ontario','Canada','Megan','Fox',1144411111,NULL);
+INSERT INTO guest values(7002,123,'Street66','Ottawa','Ontario','Canada','Slyvester','Stallone',1115551111,NULL);
+INSERT INTO guest values(7003,243,'Street12','Ottawa','Ontario','Canada','Queen','Elizabath',1111666511,NULL);
+INSERT INTO guest values(7004,423,'Street76','Ottawa','Ontario','Canada','Jennifer','Aniston',455555664,NULL);
+
+
+INSERT INTO guest values(7005,203,'Stret888','Edmonton','Alberta','Canada','Ellen','Degeneres',1111100111,NULL);
+INSERT INTO guest values(7006,203,'Street448','Kitchner','Ontario','Canada','Russel','Peters',1004411111,NULL);
+INSERT INTO guest values(7007,103,'Street668','Waterloo','Ontario','Canada','Nick','Cannon',1115551001,NULL);
+INSERT INTO guest values(7008,203,'Street128','Kinston','Ontario','Canada','Ed','Sheeran',1001666511,NULL);
+INSERT INTO guest values(7009,403,'Street768','Toronto','Ontario','Canada','Tom','Holland',400055664,NULL);
+
+/* Create properties without any reviews */
+
+/*These 3 properties belong to Host 3000 and Employee 2005 */
+INSERT INTO review values (4000,NULL, NULL, NULL);
+INSERT INTO booking_confirmation values (5000,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6000,3000,5000,2005,4000,6406.55,'Apartment',10,4,2019,15,4,2019,122,'Cobourg','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+
+INSERT INTO review values (4001,NULL, NULL, NULL);
+INSERT INTO booking_confirmation values (5001,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6001,3000,5001,2005,4001,7406.55,'Apartment',10,4,2019,15,4,2019,123,'Cobourg','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4002,NULL, NULL, NULL);
+INSERT INTO booking_confirmation values (5002,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6002,3000,5002,2005,4002,8406.55,'Apartment',10,4,2019,15,4,2019,124,'Cobourg','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+
+
+/* the next 2 belong  to employee 2006  and host 3000*/ 
+
+INSERT INTO review values (4003,NULL, NULL, NULL);
+INSERT INTO booking_confirmation values (5003,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6003,3000,5003,2006,4003,2406.55,'Apartment',10,4,2019,15,4,2019,343,'Laurier','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4004,NULL, NULL, NULL);
+INSERT INTO booking_confirmation values (5004,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6004,3000,5004,2006,4004,1406.55,'Apartment',10,4,2019,15,4,2019,222,'Friel','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+
+
+/* create some properties with existing reviews   */
+
+/* these also belong to employee 2006  and host 3002*/ 
+
+INSERT INTO review values (4005,10, 10, 10);
+INSERT INTO booking_confirmation values (5005,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6005,3002,5005,2006,4005,2206.55,'Apartment',10,4,2019,15,4,2019,343,'Street1','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4006,9, 9, 9);
+INSERT INTO booking_confirmation values (5006,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6006,3002,5006,2006,4006,6406.55,'Unique Home',10,4,2019,15,4,2019,222,'Street4','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4007,9, 9, 9);
+INSERT INTO booking_confirmation values (5007,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6007,3002,5007,2006,4007,2456.55,'Vacation Home',10,4,2019,15,4,2019,343,'Street13','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4008,2, 2, 2);
+INSERT INTO booking_confirmation values (5008,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6008,3002,5008,2006,4008,1506.55,'Vacation Home',10,4,2019,15,4,2019,222,'Street15','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+
+
+/*create more properties     have them belong to employee 2010  and host 3016   */
+
+INSERT INTO review values (4009,5, 5, 5);
+INSERT INTO booking_confirmation values (5009,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6009,3016,5009,2010,4009,15906.55,'Vacation Home',10,4,2019,15,4,2019,222,'Street15','Ottawa','Ontario','Canada','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4010,5, 5, 5);
+INSERT INTO booking_confirmation values (5010,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6010,3016,5010,2010,4010,15906.55,'Vacation Home',10,4,2019,15,4,2019,222,'Street15','New York','New York','America','VeryNice','Shared',NULL,TRUE,NULL,1,1);
+
+INSERT INTO review values (4011,5, 5, 5);
+INSERT INTO booking_confirmation values (5011,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6011,3016,5011,2010,4011,15906.55,'Vacation Home',10,4,2019,15,4,2019,222,'Street15','Houston','Texas','America','VeryNice','Shared',TRUE,TRUE,NULL,4,1);
+
+INSERT INTO review values (4012,5, 5, 5);
+INSERT INTO booking_confirmation values (5012,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6012,3016,5012,2010,4012,15911.53,'Vacation Home',10,4,2019,15,4,2019,222,'Street32','City5','California','America','VeryNice','Shared',TRUE,TRUE,NULL,4,1);
+
+
+INSERT INTO review values (4013,2, 5, 3);
+INSERT INTO booking_confirmation values (5013,'details',' cancel within 24 hours','Not Paid');
+INSERT INTO property values(6013,3016,5013,2010,4013,15911.53,'Vacation Home',10,4,2019,15,4,2019,222,'Street32','City5','California','America','VeryNice','Shared',TRUE,TRUE,NULL,4,1);
+
+
+/*   GUEST BOOKING A PROPERTY  using propery:6005   guest:7000   host:3002   */
+/* create agreement*/
+INSERT INTO property_agreement values(8000,NULL,7000,6005);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6005)
+where property_id=6005;
+
+
+/*   GUEST BUYING A PROPERTY...  create Payement*/
+INSERT INTO payment values(9000,NULL,NULL,7000,6005,NULL,NULL,'bought','credit');
+Update  payment
+Set  property_type= (SELECT property_type from property where ID=6005)
+where property_id=6005;
+
+                   /* host value must be entered into payment*/
+update payment
+set host_id=(SELECT host_id from property where ID=6005)
+where property_id=6005;
+
+				/*booking confirmation id must be entered into payment */
+update payment
+set booking_id=(SELECT booking_id from property where ID=6005)
+where property_id=6005;
+
+Update  payment
+Set  amount= (SELECT host_price from property where ID=6005)
+where property_id=6005;
+                             /*Now booking confirmation must be updated*/
+update booking_confirmation
+SET payment_status='paid'
+where ID=(SELECT booking_id from property where ID=6005);
+
+
+/* have guest 7000 book another property */
+INSERT INTO property_agreement values(8001,NULL,7000,6004);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6004)
+where property_id=6004;
+
+
+/* have guest 7001 book a property 6006  */
+INSERT INTO property_agreement values(8002,NULL,7001,6006);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6006)
+where property_id=6006;
+
+
+
+/* have guest 7002 book 3 properties 6011,  6012, 6013     with guest 7002  */
+
+INSERT INTO property_agreement values(8003,NULL,7002,6011);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6011)
+where property_id=6011;
+
+INSERT INTO property_agreement values(8004,NULL,7002,6012);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6012)
+where property_id=6012;
+
+
+INSERT INTO property_agreement values(8005,NULL,7002,6013);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6013)
+where property_id=6013;
+
+
+
+/* have guest  book and buy a property      guest: 7003    property:6002 */
+INSERT INTO property_agreement values(8006,NULL,7003,6002);
+update property_agreement
+set host_id=(SELECT host_id from property where ID=6002)
+where property_id=6002;
+
+
+/* make the payment*/
+INSERT INTO payment values(9001,NULL,NULL,7003,6002,NULL,NULL,'bought','credit');
+Update  payment
+Set  property_type= (SELECT property_type from property where ID=6002)
+where property_id=6002;
+
+update payment
+set host_id=(SELECT host_id from property where ID=6002)
+where property_id=6002;
+
+update payment
+set booking_id=(SELECT booking_id from property where ID=6002)
+where property_id=6002;
+
+
+Update  payment
+Set  amount= (SELECT host_price from property where ID=6002)
+where property_id=6002;
+                             /*Now booking confirmation must be updated*/
+update booking_confirmation
+SET payment_status='paid'
+where ID=(SELECT booking_id from property where ID=6002);
+
+
+/* have that guest create (update) a review */
+
+update review
+Set rateValue=5, communication=5, cleanliness=5
+where ID=(SELECT review_id from property where ID=6002);
+
+
+
+
+
+/*--------------------------QUERIES TO TRY OUT !!!!!!!!!!!!!!!------------------------------------------------------    */
+
+/*  SHOW ALL PROPERTIES  */
+
+select * from Property;
+
+/*  SHOW ALL PROPERTIES BY BRANCH country   example CANADA */
+
+
+SELECT branch.country,branch.name ,property.ID
+FROM (employee JOIN property ON employee.ID=employee_id)  JOIN branch on branch_id=branch.id 
+Where branch.country='Canada';
+
+/* SHOW  AVAILABLE PROPERTIES */
+
+select ID from property EXCEPT select property_id from property_agreement;
+
+
+
+/*  SHOW BOOKED PROPERTIES  */
+
+select property_id
+from property_agreement;
+
+/*  SHOW BOUGHT PROPERTIES  */
+select property_id
+from payment;
+
+
+/*  SHOW PROPERTIES BOOKED BY A SPECIFIC GUEST  example guest 7002  */
+
+SELECT property_id
+from property_agreement
+where guest_id=7002;
+
+
+
+/*  SHOW PROPERTIES BOUGHT BY A SPECIFIC GUEST (EXAMPLE GUEST:7003) */
+
+select property_id
+from payment 
+where guest_id=7003;
+
+
+/*  SHOW PROPERTIES RUN BY A SPECIFIC EMPLOYEE  */
+
+select ID
+from property
+where employee_id=2010;
+
+
+/*  SHOW EMPLOYEES THAT HAVE PROPERTIES */
+
+
+select employee.ID,Name
+from employee JOIN property ON employee.id=employee_id;
+
+
+/* view specfic review  (example from property 6005)  */
+select *
+from review
+where ID=(select review_id from property where ID=6005);
+
+
+/* view specific bill  (example from property 6005)    */
+select *
+from payment 
+where property_id=6005;
+
+
+
+
+
+
+
