@@ -28,10 +28,10 @@
 <input type="button" value="Book a Property" onclick="window.location.href='./book.php'" />
 </form>
   <form>
-<input type="button" value="Leave a Review" onclick="window.location.href='./display_review.php'" />
+<input type="button" value="Leave a Review" onclick="window.location.href='./review.php'" />
 </form>
   <form>
-<input type="button" value="Cancel" onclick="window.location.href='./display_guest.php'" />
+<input type="button" value="Cancel" onclick="window.location.href='./guest.php'" />
 </form>
     </form>
   </div>

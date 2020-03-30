@@ -17,10 +17,10 @@
       <input type="text" placeholder="ID"/>
       <button>Submit</button>
        <form>
-<input type="button" value="Look-Up Available Properties" onclick="window.location.href='./display_guestlookup.php'" />
+<input type="button" value="Look-Up Available Properties" onclick="window.location.href='./guestlookup.php'" />
 </form>      
        <form>
-<input type="button" value="Leave a Review" onclick="window.location.href='./display_review.php'" />
+<input type="button" value="Leave a Review" onclick="window.location.href='./review.php'" />
 </form>
 
 

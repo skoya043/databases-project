@@ -70,7 +70,7 @@
     </div>
     <button>Submit</button>
   <form>
-<input type="button" value="Cancel" onclick="window.location.href='./display_host.php'" />
+<input type="button" value="Cancel" onclick="window.location.href='./host.php'" />
 </form>
       <p class="message">After creating a property and clicking submit, it should give you a message in JS, "property created", then page refreshes and you click cancel to take you back to the host page. Then you can enter your id to see your updated list of properties</p>
     </form>
