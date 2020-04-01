@@ -87,7 +87,7 @@ $connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=54
     echo "<td> <p align=center>$row[5] </p></td>";
     echo "<td> <p align=center>$row[6] </p></td>";
     echo "<td> <p align=center>$row[9]/$row[8]/$row[10] </p></td>";
-    echo "<td> <p align=center>$row[12]/$row[11]$row[10] </p></td>";
+    echo "<td> <p align=center>$row[12]/$row[11]/$row[10] </p></td>";
     echo "<td style='width: 150px;'> <p align=center>$row[13] $row[14], $row[15], $row[16], $row[17]. </p></td>";
     echo "<td> <p align=center>$row[18] </p></td>";
     echo "<td> <p align=center>$row[19] </p></td>";
