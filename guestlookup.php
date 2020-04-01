@@ -48,8 +48,8 @@ $connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=54
     dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
   $stat = pg_connection_status($connection);
 
-  //change to SELECT * FROM property WHERE each attribute matches user input fields
-  $result = pg_query($connection, "SELECT * FROM property ");
+ //change to another select where each attribute matches user input
+  $result = pg_query($connection, "SELECT * FROM property WHERE property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
   if (!$result){
     echo 'error\n';
     exit;
