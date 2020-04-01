@@ -43,16 +43,25 @@ from payment
 where guest_id=7003;
 
 
-/*  SHOW PROPERTIES RUN BY A SPECIFIC EMPLOYEE  */
+/*  SHOW PROPERTIES RUN BY A SPECIFIC EMPLOYEE example employee 2010  */
 
 select ID
 from property
 where employee_id=2010;
 
 
+
+/* SHOW PROPERTIES RUN BY A SPECIFIC HOST*/
+
+select ID
+from property
+where host_id=3016;
+
+
 /*  SHOW EMPLOYEES THAT HAVE PROPERTIES */
 
-
+select employee.ID,Name
+from employee JOIN property ON employee.id=employee_id;
  
 
 
