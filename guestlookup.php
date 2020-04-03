@@ -40,4 +40,65 @@
     <h2 class="headingcenter">(Display this section after Search is clicked)Available Properties:</h2>
 </section>
 </body>
+
+
+<?php 
+
+$connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=5432
+    dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
+  $stat = pg_connection_status($connection);
+
+ //change to another select where each attribute matches user input
+  $result = pg_query($connection, "SELECT * FROM property WHERE property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
+  if (!$result){
+    echo 'error\n';
+    exit;
+  }
+?>
+
+<table align=center>
+  <table cellspacing="15">
+  <colgroup>
+    <col span="13">
+
+  </colgroup>
+  <tr>
+
+    <th><p align=center>PROPERTY ID</p></th>
+    <th><p align=center>PRICE</p></th>
+    <th><p align=center>TYPE</p></th>
+    <th><p align=center>START DAY</p></th>
+    <th><p align=center>END DAY</p></th>
+    <th style="width: 150px;"><p align=center>ADDRESS</p></th>
+    <th><p align=center>DESCRIPTION</p></th>
+    <th><p align=center>ROOM TYPE</p></th>
+    <th><p align=center>POOL</p></th>
+    <th><p align=center>WIFI</p></th>
+    <th><p align=center>LAUNDRY</p></th>
+    <th><p align=center>BED COUNT</p></th>
+    <th><p align=center>BATH COUNT</p></th>
+  </tr>
+
+  </tr>
+  <?php
+    while ($row = pg_fetch_row($result)){
+    echo "<tr>";
+    echo "<td> <p align=center>$row[1] </p></td>";
+    echo "<td> <p align=center>$row[5] </p></td>";
+    echo "<td> <p align=center>$row[6] </p></td>";
+    echo "<td> <p align=center>$row[9]/$row[8]/$row[10] </p></td>";
+    echo "<td> <p align=center>$row[12]/$row[11]/$row[10] </p></td>";
+    echo "<td style='width: 150px;'> <p align=center>$row[13] $row[14], $row[15], $row[16], $row[17]. </p></td>";
+    echo "<td> <p align=center>$row[18] </p></td>";
+    echo "<td> <p align=center>$row[19] </p></td>";
+    echo "<td> <p align=center>$row[20] </p></td>";
+    echo "<td> <p align=center>$row[21] </p></td>";
+    echo "<td> <p align=center>$row[22] </p></td>";
+    echo "<td> <p align=center>$row[23] </p></td>";
+    echo "<td> <p align=center>$row[24] </p></td>";
+    echo "</tr>";
+  }
+
+?>
+
 </html>
