@@ -20,7 +20,7 @@
 <h2 class='titlecenter'>Guest</h2>
 
   <div id ="form" class="form">
-      <p class="messageemp">Enter your Host ID to see the list of properties owned by you</p>
+      <p class="messageemp">Enter your Guest ID to see the list of properties owned by you</p>
       <div class="ajax">
     <form action="" method="POST" id="login-form" class="login-form">
       <input id='id' name='id' type="text" placeholder="ID"/>
