@@ -24,8 +24,7 @@
       <div class="ajax">
     <form action="" method="POST" id="login-form" class="login-form">
       <input id='id' name='id' type="text" placeholder="ID"/>
-      <input id="submit" name="submit" onclick="guest()" type="submit" value="Confirm">
-      <p class="message">New Properties? <a href="./property.php">Create a property</a></p>
+      <input id="submit" name="submit" onclick="guest()" type="submit" value="Submit">
 
 <input type="button" value="Look-Up Available Properties" onclick="window.location.href='./guestlookup.php'" />
 </form>      
