@@ -21,8 +21,10 @@
       <input type="date" placeholder="Check-Out Date"/>
 
       <button>submit</button>
+      <input type="button" value="Go to Payment" onclick="window.location.href='./payment.php'" />
        <form>
-<input type="button" value="Cancel" onclick="window.location.href='./guest.php'" />
+<input type="button" value="Cancel" onclick="window.location.href='./guestlookup.php'" />
+
 </form>
     </form>
   </div>
