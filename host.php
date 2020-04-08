@@ -30,7 +30,7 @@
 </div>
 
 <section> 
-    <h2 class="headingcenter">(Display this section after id is entered)Properties owned by you:</h2>
+    <h2 class="headingcenter">Properties owned by you:</h2>
 </section>
 	
 
