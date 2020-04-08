@@ -105,18 +105,18 @@
               while ($row = pg_fetch_row($result)){
                       echo "<tr>";
                       echo "<td> <p align=center>$row[0] </p></td>";
+                      echo "<td> <p align=center>$row[4] </p></td>";
                       echo "<td> <p align=center>$row[5] </p></td>";
-                      echo "<td> <p align=center>$row[6] </p></td>";
-                      echo "<td> <p align=center>$row[9]/$row[8]/$row[7] </p></td>";
-                      echo "<td> <p align=center>$row[12]/$row[11]/$row[10]</p></td>";
-                      echo "<td style='width: 150px;'> <p align=center>$row[13] $row[14], $row[15], $row[16], $row[17]. </p></td>";
+                      echo "<td> <p align=center>$row[8]/$row[7]/$row[6] </p></td>";
+                      echo "<td> <p align=center>$row[11]/$row[10]/$row[9]</p></td>";
+                      echo "<td style='width: 150px;'> <p align=center>$row[12] $row[13], $row[14], $row[15], $row[16]. </p></td>";
+                      echo "<td> <p align=center>$row[17] </p></td>";
                       echo "<td> <p align=center>$row[18] </p></td>";
                       echo "<td> <p align=center>$row[19] </p></td>";
                       echo "<td> <p align=center>$row[20] </p></td>";
                       echo "<td> <p align=center>$row[21] </p></td>";
                       echo "<td> <p align=center>$row[22] </p></td>";
-                      echo "<td> <p align=center>$row[23] </p></td>";
-                      echo "<td> <p align=center>$row[24] </p></td>";
+                      echo "<td> <p align=center>$row[243] </p></td>";
                       echo "</tr>";
               }
 
