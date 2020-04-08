@@ -89,18 +89,18 @@
       $checkout = $_POST['checkout'];
 
       $time1=strtotime($checkin);
-        $sday=(int)date('d',$time1);
-        $smonth=(int)date('n',$time1);
-        $syear=(int)date('Y',$time1);
+        $sday= date('d',$time1);
+        $smonth= date('n',$time1);
+        $syear= date('Y',$time1);
 
       $time2=strtotime($checkout);
-        $eday=(int)date('d',$time2);
-        $emonth=(int)date('n',$time2);
-        $eyear=(int)date('Y',$time2);
+        $eday= date('d',$time2);
+        $emonth= date('n',$time2);
+        $eyear= date('Y',$time2);
 
           if($min_price!=null && $max_price!=null && $city!=null && $country!=null && $province!=null && $checkin!=null && $checkout!=null){
 
-              $result = pg_query($connection, "SELECT * FROM property WHERE property.host_price >= $min_price and property.host_price <= $max_price and property.city = '$city' and property.province = '$province' and property.country = '$country' and property.start_day <= $sday and property.start_month <= $smonth and property.start_year <= $syear and property.end_day >= $eday and property.end_month >= $emonth and property.end_year >= $eyear and property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
+              $result = pg_query($connection, "SELECT * FROM property WHERE property.host_price >= $min_price and property.host_price <= $max_price and property.city = '$city' and property.province = '$province' and property.country = '$country' and property.start_day = $sday and property.start_month = $smonth and property.start_year = $syear and property.end_day = $eday and property.end_month = $emonth and property.end_year = $eyear and property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
 
               while ($row = pg_fetch_row($result)){
                       echo "<tr>";
