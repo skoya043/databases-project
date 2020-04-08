@@ -1,8 +1,15 @@
+<?php 
+  $connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com
+    dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
 <head>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
    <link href="./style.css" type="text/css" rel="stylesheet">
+   <script src="script.js"></script>
 </head> 
 
 <div>
@@ -12,49 +19,36 @@
 <h2 class='titlecenter'>Look-Up a Property</h2>
 
   <div class="form">
-    <form class="login-form">
-      <input type="text" placeholder="Your Guest ID"/>      
-      <input type="text" placeholder="Min Price (Should we change this to a range spinner?) "/>     
-      <input type="text" placeholder="Max Price"/>    
-       <input type="text" placeholder="City"/>   
-       <input type="text" placeholder="Province"/>      
-       <input type="text" placeholder="Country"/>  
+    <form class="login-form" method="post">
+      <div class="ajax">
+    <form action="" method="POST" id="login-form" class="login-form"> 
+      <input id='min' name='min' type="text" placeholder="Min Price"/>     
+      <input id='max' name='max' type="text" placeholder="Max Price"/>
+      <input id='city' name='city' type="text" placeholder="City"/> 
+      <input id='province' name='province' type="text" placeholder="Province"/> 
+      <input id='country' name='country' type="text" placeholder="Country"/>
         <p style="margin-top: 10px;" class="checkboxmessage">Check-In Date</p>
-      <input type="date" placeholder="Check-In Date"/>
+      <input id='checkin' name='checkin' type="date" placeholder="Check-In Date"/>
        <p style="margin-top: 10px;" class="checkboxmessage">Check-Out Date</p>
-      <input type="date" placeholder="Check-Out Date"/>    
-      <button>Search</button>
-  <form>
-<input type="button" value="Book a Property" onclick="window.location.href='./book.php'" />
-</form>
-  <form>
-<input type="button" value="Leave a Review" onclick="window.location.href='./review.php'" />
-</form>
-  <form>
-<input type="button" value="Cancel" onclick="window.location.href='./guest.php'" />
-</form>
+      <input id='checkout' name='checkout' type="date" placeholder="Check-Out Date"/>    
+      <input id="submit" name="submit" onclick="guestlookup()" type="submit" value="Search">
+      <form>
+        <input type="button" value="Book a Property" onclick="window.location.href='./book.php'" />
+      </form>
+      <form>
+        <input type="button" value="Leave a Review" onclick="window.location.href='./review.php'" />
+      </form>
+      <form>
+        <input type="button" value="Cancel" onclick="window.location.href='./guest.php'" />
+      </form>
     </form>
   </div>
+</div>
 
 <section> 
-    <h2 class="headingcenter">(Display this section after Search is clicked)Available Properties:</h2>
+    <h2 class="headingcenter">Available Properties:</h2>
 </section>
 </body>
-
-
-<?php 
-
-$connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=5432
-    dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
-  $stat = pg_connection_status($connection);
-
- //change to another select where each attribute matches user input
-  $result = pg_query($connection, "SELECT * FROM property WHERE property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
-  if (!$result){
-    echo 'error\n';
-    exit;
-  }
-?>
 
 <table align=center>
   <table cellspacing="15">
@@ -79,26 +73,59 @@ $connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=54
     <th><p align=center>BATH COUNT</p></th>
   </tr>
 
-  </tr>
-  <?php
-    while ($row = pg_fetch_row($result)){
-    echo "<tr>";
-    echo "<td> <p align=center>$row[1] </p></td>";
-    echo "<td> <p align=center>$row[5] </p></td>";
-    echo "<td> <p align=center>$row[6] </p></td>";
-    echo "<td> <p align=center>$row[9]/$row[8]/$row[10] </p></td>";
-    echo "<td> <p align=center>$row[12]/$row[11]/$row[10] </p></td>";
-    echo "<td style='width: 150px;'> <p align=center>$row[13] $row[14], $row[15], $row[16], $row[17]. </p></td>";
-    echo "<td> <p align=center>$row[18] </p></td>";
-    echo "<td> <p align=center>$row[19] </p></td>";
-    echo "<td> <p align=center>$row[20] </p></td>";
-    echo "<td> <p align=center>$row[21] </p></td>";
-    echo "<td> <p align=center>$row[22] </p></td>";
-    echo "<td> <p align=center>$row[23] </p></td>";
-    echo "<td> <p align=center>$row[24] </p></td>";
-    echo "</tr>";
-  }
+<?php  
+  $connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com port=5432
+    dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
 
+    if(isset($_POST['submit'])){
+      if($_POST['submit']=="Search"){
+
+      $min_price = (float)$_POST['min'];
+      $max_price = (float)$_POST['max'];
+      $city = $_POST['city'];
+      $province = $_POST['province'];
+      $country = $_POST['country'];
+      $checkin = $_POST['checkin'];
+      $checkout = $_POST['checkout'];
+
+      $time1=strtotime($checkin);
+        $sday=date('d',$time1);
+        $smonth=date('n',$time1);
+        $syear=date('Y',$time1);
+
+      $time2=strtotime($checkout);
+        $eday=date('d',$time2);
+        $emonth=date('n',$time2);
+        $eyear=date('Y',$time2);
+
+
+      //$query = pg_query("SELECT * FROM property where property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
+
+      //if(pg_num_rows($query) == 1){
+
+          if($min_price!=null && $max_price!=null && $city!=null && $country!=null && $province!=null){ //&& $checkin!=null && $checkout!=null){
+
+              $result = pg_query($connection, "SELECT * FROM property WHERE property.host_price >= $min_price and property.host_price <= $max_price and property.city = '$city' and property.province = '$province' and property.country = '$country' and property.start_day = $sday and property.start_month = $smonth and property.start_year = $syear and property.end_day = $eday and property.end_month = $emonth and property.end_year = $eyear and property.id NOT IN (SELECT property_agreement.property_id FROM property_agreement)");
+
+              while ($row = pg_fetch_row($result)){
+                      echo "<tr>";
+                      echo "<td> <p align=center>$row[0] </p></td>";
+                      echo "<td> <p align=center>$row[5] </p></td>";
+                      echo "<td> <p align=center>$row[6] </p></td>";
+                      echo "<td> <p align=center>$row[9]/$row[8]/$row[7] </p></td>";
+                      echo "<td> <p align=center>$row[12]/$row[11]/$row[10]</p></td>";
+                      echo "<td style='width: 150px;'> <p align=center>$row[13] $row[14], $row[15], $row[16], $row[17]. </p></td>";
+                      echo "<td> <p align=center>$row[18] </p></td>";
+                      echo "<td> <p align=center>$row[19] </p></td>";
+                      echo "<td> <p align=center>$row[20] </p></td>";
+                      echo "<td> <p align=center>$row[21] </p></td>";
+                      echo "<td> <p align=center>$row[22] </p></td>";
+                      echo "<td> <p align=center>$row[23] </p></td>";
+                      echo "<td> <p align=center>$row[24] </p></td>";
+                      echo "</tr>";
+              }
+
+          }
+    }}//}
 ?>
-
 </html>
