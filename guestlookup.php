@@ -116,7 +116,7 @@
                       echo "<td> <p align=center>$row[20] </p></td>";
                       echo "<td> <p align=center>$row[21] </p></td>";
                       echo "<td> <p align=center>$row[22] </p></td>";
-                      echo "<td> <p align=center>$row[243] </p></td>";
+                      echo "<td> <p align=center>$row[23] </p></td>";
                       echo "</tr>";
               }
 
