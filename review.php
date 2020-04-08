@@ -22,11 +22,11 @@
   <div class="form">
     <div class="ajax">
     <form id="form" name="form" class="login-form" method="post">
-      <input id = propertyid type="text" placeholder="Property ID"/>
-      <input id = guestid type="text" placeholder="Your Guest ID"/>
-      <input id = ratingvalue type="text" placeholder="Rating (1 - 5)"/>
-      <input id = cleanliness type="text" placeholder="Cleanliness (1 - 5)"/>
-      <input id = communication type="text" placeholder="Communication (1 - 5)"/>
+      <input id = propertyid name = propertyid type="text" placeholder="Property ID"/>
+      <input id = guestid name = guestid type="text" placeholder="Your Guest ID"/>
+      <input id = ratingvalue name = ratingvalue type="text" placeholder="Rating (1 - 5)"/>
+      <input id = cleanliness name = cleanliness type="text" placeholder="Cleanliness (1 - 5)"/>
+      <input id = communication  name = communication type="text" placeholder="Communication (1 - 5)"/>
       <input type="text" placeholder="Comments"/>
       <input id="submit" name="submit" type="submit" onclick="review()" value="Confirm">
 
