@@ -61,9 +61,7 @@ if(isset($_POST['submit'])){
           //update into property table 
           $update = pg_query($connection, "UPDATE property SET review_id = $reviewid WHERE property.id=$propertyid");
 
-          if($createReview){
-            echo "<script type='text/javascript'>alert('Review Successfully Completed');</script>"; 
-          }
+          echo "<script type='text/javascript'>alert('Review Successfully Completed');</script>";
 
       }else{
         echo "<script type='text/javascript'>alert('Failure. Fill All Fields.');</script>";
