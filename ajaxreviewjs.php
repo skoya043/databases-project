@@ -2,20 +2,23 @@
 	$connection = pg_connect("host=ec2-3-234-109-123.compute-1.amazonaws.com
     dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
 
-	$propertyid = $_POST['propertyid'];
-    $guestid = $_POST['guestid'];
-    $ratingvalue = $_POST['ratingvalue'];
+	$propertyid = (int)$_POST['propertyid'];
+    $guestid = (int)$_POST['guestid'];
+    $ratingvalue = (float)$_POST['ratingvalue'];
     $cleanliness = $_POST['cleanliness'];
     $communication = $_POST['communication'];
 
-    //find the review id that corresponds to the inputted propertyid and guestid  
-    $reviewid = pg_query($connection, "SELECT review.id FROM review, property, property_agreement WHERE review.id = property.review_id and property.id = property_agreement.property_id and property.id = property_agreement.property_id and property.id=$propertyid and property_agreement.guest_id=$guestid"); 
+  
+    //create a random new review id
+    $reviewid = rand(4100, 4300);
 
 	if (isset($_POST['propertyid'])) {
-		// $query = pg_query("INSERT into review(id, ratevalue, communication, cleanliness) values ($reviewid, $ratingvalue, '$communication','$cleanliness')"); 
-		
-		// $query= pg_query($connection, "UPDATE review SET 
-  //         review.ratevalue = $ratingvalue, review.communication = '$communication', review.cleanliness = '$cleanliness' WHERE id = $reviewid");
+
+		//insert the new review into db
+    	$createReview = pg_query($connection, "INSERT INTO review(id, ratevalue, communication, cleanliness) VALUES ($reviewid, $ratingvalue, $communication, $cleanliness)");
+
+    	//update property table
+    	$update = pg_query($connection, "UPDATE property SET review_id = $reviewid WHERE property.id=$propertyid");
 
 		echo "Your review has been submitted succesfully";
 

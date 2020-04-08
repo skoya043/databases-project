@@ -51,28 +51,26 @@ if(isset($_POST['submit'])){
       $cleanliness = $_POST['cleanliness'];
       $communication = $_POST['communication'];
 
+      //create a random new review id
+      $reviewid = rand(4100, 4300);
+
       if($propertyid!=null && $guestid!=null && $ratingvalue!=null && $cleanliness!=null && $communication!=null){
 
-        $reviewid = pg_query($connection, "SELECT review.id FROM review, property, property_agreement WHERE review.id = property.review_id 
-        and property.id = property_agreement.property_id and property.id = property_agreement.property_id and property.id=$propertyid and property_agreement.guest_id=$guestid"); 
+        if (isset($_POST['reviewid'])) {
 
-        while ($row = pg_fetch_row($reviewid)){
-             $review = $row[0];
-        }
+          $createReview = pg_query($connection, "insert into review values ($reviewid, $ratingvalue, '$communication', '$cleanliness')");
 
-      // $sql = pg_query($connection, "INSERT INTO review(id, ratevalue, communication, cleanliness) VALUES (%reviewid, $ratingvalue, '$communication', '$cleanliness')" ); 
+          //update into property table 
+          $update = pg_query($connection, "UPDATE property SET review_id = $reviewid WHERE property.id=$propertyid");
 
-        $query= pg_query($connection, "UPDATE review SET 
-          review.ratevalue = $ratingvalue, review.communication = '$communication', review.cleanliness = '$cleanliness' WHERE id = $review;");
-      }
-
-      if($sql){
-        echo "<script type='text/javascript'>alert('Review Successfully Completed');</script>"; 
+          if($createReview){
+            echo "<script type='text/javascript'>alert('Review Successfully Completed');</script>"; 
+          }
 
       }else{
         echo "<script type='text/javascript'>alert('Failure. Fill All Fields.');</script>";
       }
-  }}
+  }}}
 ?>
 
 </body>
