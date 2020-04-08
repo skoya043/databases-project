@@ -60,8 +60,9 @@
     dbname=d32q2phg95025m user=lqzdpzojxkruxi password= 5ee44c6c9c16025d9b8e67d6f0e0d182831d9b3c99d5e3e09e96d42f72776b80");
 
 
-  if($_POST['submit'])
-  {
+if(isset($_POST['submit'])){
+  if($_POST['submit']=="Confirm"){
+
   $record = $_POST["id"];
   if($record!=null){
   $query = pg_query("SELECT * FROM host WHERE id='$record'");
@@ -83,6 +84,7 @@
         echo "</tr>";
         }
       }
+}
 }
 }
     
