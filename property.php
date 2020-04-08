@@ -159,7 +159,7 @@ if($hostid!=null && $name!=null && $housenum!=null && $street!=null && $city!=nu
         $employee=$row[0];
       }
 
-  $query = pg_query($connection, "insert into property(id, host_id, booking_id, employee_id, review_id, host_price, property_type, start_day, start_month, start_year, end_day, end_month, end_year, house_num, street, city, province, country, description, room_type, pool, wifi, laundry, bed_count, bath_count) values ($randomid, $hostid, null, $employee, null, $pricepernight, '$property_type', $sday, $smonth, $syear, $eday, $emonth, $eyear, '$housenum', '$street', '$city', '$province', '$country', '$description', '$room_type', $pool, $wifi, $laundry, $bednum, $bathnum)"); //Insert Query
+  $query = pg_query($connection, "insert into property(id, host_id, employee_id, review_id, host_price, property_type, start_day, start_month, start_year, end_day, end_month, end_year, house_num, street, city, province, country, description, room_type, pool, wifi, laundry, bed_count, bath_count) values ($randomid, $hostid, $employee, null, $pricepernight, '$property_type', $sday, $smonth, $syear, $eday, $emonth, $eyear, '$housenum', '$street', '$city', '$province', '$country', '$description', '$room_type', $pool, $wifi, $laundry, $bednum, $bathnum)"); //Insert Query
   if($query){
     echo "<script type='text/javascript'>alert('Property Successfully Created');</script>";
   }
