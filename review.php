@@ -21,7 +21,7 @@
 
   <div class="form">
     <div class="ajax">
-    <form class="login-form">
+    <form id="form" name="form" class="login-form" method="post">
       <input id = propertyid type="text" placeholder="Property ID"/>
       <input id = guestid type="text" placeholder="Your Guest ID"/>
       <input id = ratingvalue type="text" placeholder="Rating (1 - 5)"/>
@@ -56,8 +56,6 @@ if(isset($_POST['submit'])){
 
       if($propertyid!=null && $guestid!=null && $ratingvalue!=null && $cleanliness!=null && $communication!=null){
 
-        if (isset($_POST['reviewid'])) {
-
           $createReview = pg_query($connection, "insert into review values ($reviewid, $ratingvalue, '$communication', '$cleanliness')");
 
           //update into property table 
@@ -70,7 +68,7 @@ if(isset($_POST['submit'])){
       }else{
         echo "<script type='text/javascript'>alert('Failure. Fill All Fields.');</script>";
       }
-  }}}
+  }}
 ?>
 
 </body>
