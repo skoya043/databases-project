@@ -28,7 +28,7 @@
       <input id = cleanliness type="text" placeholder="Cleanliness (1 - 5)"/>
       <input id = communication type="text" placeholder="Communication (1 - 5)"/>
       <input type="text" placeholder="Comments"/>
-      <input id="submit" name="submit" type="submit" onclick="review()"value="Confirm">
+      <input id="submit" name="submit" type="submit" onclick="review()" value="Confirm">
 
   <form>
 <input type="button" value="Cancel" onclick="window.location.href='./guest.php'" />
