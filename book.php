@@ -92,7 +92,7 @@
 
     
     
-    $query = pg_query($connection, "insert into property_agreement values ($property_agreementID, null, $guestID, $propertyID,$sday,$smonth,$syear,$eday,$emonth,$eyear)"); //Insert Query
+    $query = pg_query($connection, "insert into property_agreement values ($property_agreementID, $guestID, $propertyID,$sday,$smonth,$syear,$eday,$emonth,$eyear)"); //Insert Query
     
     if($query){
         echo "<script type='text/javascript'>alert('Property Successfully booked');</script>";

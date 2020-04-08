@@ -70,14 +70,15 @@
 
     
     
-    $query = pg_query($connection, "insert into payment values ($paymentID, NULL, NULL, $guestID,$propertyID,NULL,$amountValue,'bought','$Paytype')"); //Insert Query
+    $query = pg_query($connection, "insert into payment values ($paymentID, NULL, $guestID,$propertyID,NULL,$amountValue,'bought','$Paytype')"); //Insert Query
 	$query2 = pg_query($connection, "Update  payment Set  property_type=(SELECT property_type from property where ID=$propertyID) where ID=$paymentID");
 	$query3 = pg_query($connection, "Update  payment Set  property_agreement_id= (SELECT property_agreement.ID from property_agreement where property_id=$propertyID) where ID=$paymentID");
+	$query4 = pg_query($connection, "Update  payment Set  host_id= (SELECT host_ID from property where property.ID=$propertyID) where ID=$paymentID");
 	
 	
 	
     
-    if($query && $query2 && $query3){
+    if($query && $query2 && $query3 && query4){
         echo "<script type='text/javascript'>alert('Property Successfully bought');</script>";
         }
 
